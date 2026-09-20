@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f5fb8">
+<title>骅旸驾校｜学车时间计算器</title>
+<meta name="description" content="成都市骅旸驾校大学生学车时间计算器：按车型、练车频率和考试预约情况，估算拿证时间。">
+<style>
+:root{--b:#0f5fb8;--b2:#0a417f;--o:#ff8a34;--g:#19a974;--bg:#f5f8fc;--c:#fff;--t:#182230;--m:#6f7d90;--bd:#e2e9f2;--warn:#c77700;--danger:#c94a45}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--t);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}.wrap{max-width:760px;margin:0 auto;padding:0 14px 36px}.hero{margin:0 -14px 16px;padding:24px 20px 30px;background:linear-gradient(145deg,#0b4d96,#1471ce);color:#fff;border-radius:0 0 28px 28px;position:relative;overflow:hidden}.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.08)}.hero:before{width:180px;height:180px;right:-70px;top:-70px}.hero:after{width:110px;height:110px;left:-50px;bottom:-50px}.brand{font-size:13px;letter-spacing:.6px;opacity:.88;font-weight:700}.hero h1{font-size:30px;line-height:1.12;margin:10px 0 10px}.hero p{font-size:14px;line-height:1.7;margin:0;opacity:.9}.hero-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}.pill{font-size:12px;padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}.card{background:#fff;border:1px solid var(--bd);border-radius:18px;padding:16px;margin:12px 0;box-shadow:0 8px 30px rgba(24,55,88,.05)}.section-title{font-size:17px;font-weight:800;margin:0 0 14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}.field input,.field select{width:100%;height:46px;border-radius:12px;border:1px solid var(--bd);background:#fbfdff;color:var(--t);padding:0 12px;font-size:16px;outline:none}.field input:focus,.field select:focus{border-color:#79afe5;box-shadow:0 0 0 3px rgba(15,95,184,.08)}.full{grid-column:1/-1}.btn{width:100%;height:48px;border:0;border-radius:13px;background:linear-gradient(135deg,var(--b),#1975d2);color:#fff;font-size:16px;font-weight:800;box-shadow:0 8px 20px rgba(15,95,184,.2)}.hint{font-size:12px;line-height:1.7;color:var(--m);margin-top:10px}.results{display:none}.results.show{display:block}.summary{display:grid;grid-template-columns:1.2fr .8fr;gap:10px}.big{background:linear-gradient(135deg,#eef6ff,#f9fbff);border:1px solid #d8e8f8;border-radius:16px;padding:14px}.big .k{font-size:12px;color:var(--m)}.big .v{font-size:23px;font-weight:900;color:var(--b2);margin-top:7px}.big .s{font-size:12px;color:var(--m);margin-top:5px}.status{border-radius:16px;padding:14px;background:#fff8ed;border:1px solid #f6ddba}.status .k{font-size:12px;color:var(--m)}.status .v{font-size:22px;font-weight:900;color:var(--warn);margin-top:7px}.status.good{background:#effaf5;border-color:#c9eadc}.status.good .v{color:var(--g)}.timeline{position:relative;padding-left:2px}.step{display:grid;grid-template-columns:42px 1fr;gap:10px;position:relative;padding:4px 0 18px}.step:not(:last-child):before{content:"";position:absolute;left:19px;top:39px;width:2px;height:calc(100% - 22px);background:#d9e6f3}.dot{width:40px;height:40px;border-radius:13px;display:flex;align-items:center;justify-content:center;background:#edf5fd;color:var(--b);font-weight:900;z-index:1}.step h3{font-size:15px;margin:1px 0 4px}.step .date{font-size:13px;font-weight:800;color:var(--b)}.step p{font-size:12px;color:var(--m);line-height:1.6;margin:4px 0 0}.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.mini-btn{height:43px;border-radius:11px;border:1px solid var(--bd);background:#fff;color:var(--t);font-weight:700;font-size:14px}.mini-btn.primary{background:#fff4e9;color:#a6530f;border-color:#f3d0ad}.notice{font-size:12px;line-height:1.75;color:var(--m)}.footer{text-align:center;color:#8a97a8;font-size:12px;padding:8px 0 0}.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#202a36;color:#fff;padding:10px 14px;border-radius:10px;font-size:13px;opacity:0;pointer-events:none;transition:.2s;z-index:20}.toast.show{opacity:1}.lead{margin-top:12px;padding:13px;border-radius:14px;background:linear-gradient(135deg,#fff8ed,#fff);border:1px solid #f3dec4}.lead strong{color:#9f530e}.legal-link{color:var(--b);text-decoration:none}.muted-box{padding:11px 12px;border-radius:12px;background:#f7f9fc;border:1px dashed #d6e0ec;font-size:12px;color:var(--m);line-height:1.65}
+@media(max-width:520px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.summary{grid-template-columns:1fr 1fr}.hero h1{font-size:27px}.big .v,.status .v{font-size:20px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<section class="hero"><div class="brand">成都市骅旸驾校 · 大学生学车工具</div><h1>算一算，你大概什么时候能拿驾照？</h1><p>输入车型、每周练车次数和目标日期，30秒生成你的学车时间表。</p><div class="hero-badges"><span class="pill">C1 / C2</span><span class="pill">时间线自动生成</span><span class="pill">大学生课表友好</span></div></section>
+<section class="card">
+<h2 class="section-title">① 填写你的情况</h2>
+<div class="grid">
+<div class="field"><label>报考车型</label><select id="license"><option value="C1">C1 手动挡</option><option value="C2">C2 自动挡</option></select></div>
+<div class="field"><label>计划开始日期</label><input id="startDate" type="date"></div>
+<div class="field"><label>每周能练几次</label><select id="freq"><option value="1">1次 / 周</option><option value="2" selected>2次 / 周</option><option value="3">3次 / 周</option><option value="4">4次 / 周</option><option value="5">5次 / 周</option><option value="6">6次 / 周</option></select></div>
+<div class="field"><label>科一刷题速度</label><select id="theory"><option value="5">集中刷题 · 约5天</option><option value="8" selected>正常节奏 · 约8天</option><option value="14">轻松安排 · 约14天</option></select></div>
+<div class="field"><label>预计预约等待</label><select id="queue"><option value="3">顺畅 · 约3天</option><option value="7" selected>一般 · 约7天</option><option value="14">紧张 · 约14天</option><option value="21">较紧张 · 约21天</option></select></div>
+<div class="field"><label>学车节奏</label><select id="pace"><option value="fast">赶时间</option><option value="normal" selected>正常稳妥</option><option value="easy">轻松安排</option></select></div>
+<div class="field full"><label>希望最晚什么时候拿证（可选）</label><input id="targetDate" type="date"></div>
+</div>
+<div id="sessionHint" class="muted-box" style="margin-top:12px">C1 默认按科二约10次、科三约8次训练做规划估算；这是咨询阶段的计划量，不是法定学时。</div>
+<button class="btn" id="calcBtn" type="button" style="margin-top:14px">立即计算拿证时间</button>
+<div class="hint">提示：这是规划估算，不等于考试预约承诺。挂科、天气、考试周、预约名额等都会影响实际日期。</div>
+</section>
+<div id="results" class="results">
+<section class="card"><h2 class="section-title">② 你的预计结果</h2><div class="summary"><div class="big"><div class="k">现实预计拿证</div><div id="resultDate" class="v">—</div><div id="resultDays" class="s">—</div></div><div id="statusBox" class="status"><div class="k">目标日期判断</div><div id="targetStatus" class="v">未设置</div><div id="targetDetail" class="s">—</div></div></div><div class="lead"><strong>给你的建议：</strong><span id="salesExplain">—</span></div><div class="actions"><button class="mini-btn primary" id="copyBtn" type="button">复制我的时间计划</button><button class="mini-btn" id="recalcBtn" type="button">重新计算</button></div></section>
+<section class="card"><h2 class="section-title">③ 你的学车时间线</h2><div id="timeline" class="timeline"></div></section>
+<section class="card"><h2 class="section-title">④ 规划说明</h2><div class="notice"><p>当前法规下，C1/C2 科目二在取得学习驾驶证明满10日后可预约；C2科目三满20日，C1科目三满30日。工具还叠加了你的练车频率、科一准备和预约等待，因此结果通常比“法规最早时间”更现实。</p><p>法规依据：公安部令第172号，自2025年1月1日起施行。<a class="legal-link" href="https://www.gov.cn/gongbao/2025/issue_11866/material/gwygb202505.pdf" target="_blank" rel="noopener">查看官方文件</a></p></div></section>
+</div>
+<div class="footer">成都市骅旸驾校 · 先算清时间，再安排学车</div>
+</div>
+<div id="toast" class="toast">已复制</div>
+<script>
+(function(){
+const $=id=>document.getElementById(id),DAY=86400000;
+function pad(n){return String(n).padStart(2,'0')}
+function today(){const d=new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
+function parse(s){if(!s)return null;const a=s.split('-').map(Number);return new Date(Date.UTC(a[0],a[1]-1,a[2]))}
+function fmt(d){return d.getUTCFullYear()+'年'+(d.getUTCMonth()+1)+'月'+d.getUTCDate()+'日'}
+function add(d,n){return new Date(d.getTime()+n*DAY)}
+function diff(a,b){return Math.round((b-a)/DAY)}
+function maxd(){return new Date(Math.max.apply(null,[].slice.call(arguments).map(x=>x.getTime())))}
+function model(t){return t==='C2'?{k2:8,k3:7}:{k2:10,k3:8}}
+function trainDays(count,per,pace){const m=pace==='fast'?.85:pace==='easy'?1.15:1;return Math.max(1,Math.ceil(count/per*7*m))}
+function paceName(p){return p==='fast'?'赶时间':p==='easy'?'轻松安排':'正常稳妥'}
+function calc(){
+const type=$('license').value,start=parse($('startDate').value),per=Number($('freq').value),theory=Number($('theory').value),queue=Number($('queue').value),pace=$('pace').value,target=parse($('targetDate').value);
+if(!start){alert('请选择开始日期');return}
+const s=model(type),k1=add(start,theory+queue),learn=k1,legalK2=add(learn,10),legalK3=add(learn,type==='C2'?20:30),k2Ready=add(learn,trainDays(s.k2,per,pace)),k2=add(maxd(legalK2,k2Ready),queue),k3Ready=add(k2,trainDays(s.k3,per,pace)),k3=add(maxd(legalK3,k3Ready),queue),k4=add(k3,Math.max(1,Math.round(queue/3))),finish=add(k4,1),total=diff(start,finish);
+$('resultDate').textContent=fmt(finish);$('resultDays').textContent='约 '+total+' 天 · '+Math.ceil(total/7)+' 周';
+const box=$('statusBox');box.className='status';
+if(target){const d=diff(finish,target);if(d>=0){$('targetStatus').textContent='可以冲';$('targetDetail').textContent='预计可提前约 '+d+' 天';box.classList.add('good')}else{$('targetStatus').textContent='偏紧';$('targetDetail').textContent='按当前节奏约晚 '+Math.abs(d)+' 天'}}else{$('targetStatus').textContent='未设置';$('targetDetail').textContent='可填写目标拿证日'}
+const freq=per>=4?'高频练车':per>=2?'规律练车':'低频练车';$('salesExplain').textContent='按 '+type+'、每周 '+per+' 次练车和“'+paceName(pace)+'”节奏，建议按约 '+Math.ceil(total/7)+' 周规划。'+freq+'情况下，固定每周2—3个时间段通常更容易把周期控住。';
+const steps=[['开始准备',start,'确定车型、资料和学习节奏'],['科目一',k1,'完成理论准备与考试'],['科目二',k2,'约 '+s.k2+' 次训练；满足最低预约间隔后安排考试'],['科目三',k3,'约 '+s.k3+' 次道路训练；'+(type==='C2'?'最低预约间隔20日':'最低预约间隔30日')],['科目四 / 拿证',finish,'通过安全文明驾驶常识后进入领证环节']];
+$('timeline').innerHTML=steps.map((x,i)=>'<div class="step"><div class="dot">'+(i+1)+'</div><div><h3>'+x[0]+'</h3><div class="date">'+fmt(x[1])+'</div><p>'+x[2]+'</p></div></div>').join('');
+window.__last='【成都市骅旸驾校｜我的学车时间计划】\n车型：'+type+'\n开始：'+fmt(start)+'\n预计拿证：'+fmt(finish)+'\n预计周期：约'+total+'天（'+Math.ceil(total/7)+'周）\n练车频率：每周'+per+'次\n节奏：'+paceName(pace)+'\n\n结果为规划估算，实际以考试预约和个人学习情况为准。';
+$('results').classList.add('show');setTimeout(()=>$('results').scrollIntoView({behavior:'smooth',block:'start'}),50)
+}
+function toast(s){$('toast').textContent=s;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),1400)}
+async function copy(){const t=window.__last||'';if(!t)return;try{await navigator.clipboard.writeText(t);toast('时间计划已复制')}catch(e){const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();toast('时间计划已复制')}}
+$('startDate').value=today();
+$('calcBtn').addEventListener('click',calc);$('copyBtn').addEventListener('click',copy);$('recalcBtn').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+$('license').addEventListener('change',()=>{const s=model($('license').value);$('sessionHint').textContent=$('license').value+' 默认按科二约'+s.k2+'次、科三约'+s.k3+'次训练做规划估算；这是咨询阶段的计划量，不是法定学时。'});
+})();
+</script>
+</body></html>
