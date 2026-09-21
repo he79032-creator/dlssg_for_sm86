@@ -53,7 +53,7 @@ function trainDays(count,per,pace){const m=pace==='fast'?.85:pace==='easy'?1.15:
 function paceName(p){return p==='fast'?'赶时间':p==='easy'?'轻松安排':'正常稳妥'}
 function calc(){
 const type=$('license').value,start=parse($('startDate').value),per=Number($('freq').value),theory=Number($('theory').value),queue=Number($('queue').value),pace=$('pace').value,target=parse($('targetDate').value);
-if(!start){alert('请选择开始日期');return}
+if(!start){toast('请选择开始日期');return}
 const s=model(type),k1=add(start,theory+queue),learn=k1,legalK2=add(learn,10),legalK3=add(learn,type==='C2'?20:30),k2Ready=add(learn,trainDays(s.k2,per,pace)),k2=add(maxd(legalK2,k2Ready),queue),k3Ready=add(k2,trainDays(s.k3,per,pace)),k3=add(maxd(legalK3,k3Ready),queue),k4=add(k3,Math.max(1,Math.round(queue/3))),finish=add(k4,1),total=diff(start,finish);
 $('resultDate').textContent=fmt(finish);$('resultDays').textContent='约 '+total+' 天 · '+Math.ceil(total/7)+' 周';
 const box=$('statusBox');box.className='status';
