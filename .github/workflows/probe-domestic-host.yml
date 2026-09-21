@@ -11,11 +11,23 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Inspect SharingHTML upload flow
+      - name: Inspect SharingHTML JS
         run: |
           set -e
-          curl -L -sS 'https://sharinghtml.com/zh-CN/' -o /tmp/page
-          echo '--- forms ---'
-          grep -Eo '<form[^>]*>|action="[^"]+"|fetch\([^)]*|axios\.[a-z]+\([^)]*|/api/[A-Za-z0-9_/?=&.-]+' /tmp/page | head -200 || true
-          echo '--- scripts ---'
-          grep -Eo '<script[^>]+src="[^"]+"' /tmp/page | head -50 || true
+          base='https://sharinghtml.com'
+          curl -L -sS "$base/zh-CN/" -o /tmp/page
+          grep -Eo '<script[^>]+src="[^"]+"' /tmp/page | sed -E 's/.*src="([^"]+)".*/\1/' > /tmp/scripts
+          : > /tmp/alljs
+          while read -r src; do
+            case "$src" in
+              http*) url="$src" ;;
+              *) url="$base$src" ;;
+            esac
+            echo "FETCH $url"
+            curl -L -sS "$url" >> /tmp/alljs || true
+            echo >> /tmp/alljs
+          done < /tmp/scripts
+          echo '--- candidate endpoints ---'
+          grep -Eo 'https://[^"''' ]+|/api/[A-Za-z0-9_/?=&.%:-]+' /tmp/alljs | sort -u | grep -Ei 'upload|file|html|api' | head -300 || true
+          echo '--- upload contexts ---'
+          grep -Eio '.{0,180}(upload|multipart|FormData|manageUrl|publicUrl|shareUrl).{0,300}' /tmp/alljs | head -200 || true
