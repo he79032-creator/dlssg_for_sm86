@@ -1,11 +1,6 @@
 name: Deploy Huayang Drive Time Calculator
 
 on:
-  push:
-    branches: ["main"]
-    paths:
-      - "huayang-drive-time/**"
-      - ".github/workflows/huayang-pages.yml"
   workflow_dispatch:
 
 permissions:
