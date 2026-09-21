@@ -1,0 +1,44 @@
+name: Deploy Huayang Drive Time Calculator
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "huayang-drive-time/**"
+      - ".github/workflows/huayang-pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Prepare site
+        run: |
+          mkdir -p _site/huayang-drive-time
+          cp -r huayang-drive-time/* _site/huayang-drive-time/
+          cat > _site/index.html <<'EOF'
+          <!doctype html><html><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=./huayang-drive-time/"><title>成都市骅旸驾校</title></head><body><a href="./huayang-drive-time/">进入学车时间计算器</a></body></html>
+          EOF
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "_site"
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
