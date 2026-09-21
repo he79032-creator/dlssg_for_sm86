@@ -1,0 +1,30 @@
+name: Test Static Host Fallbacks
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - ".github/workflows/static-host-test.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test candidate URLs
+        run: |
+          set +e
+          UA='Mozilla/5.0 (Linux; Android 14; Mobile) AppleWebKit/537.36 MicroMessenger/8.0.50'
+          for url in             'https://raw.githack.com/he79032-creator/dlssg_for_sm86/main/huayang-drive-time/index.html'             'https://cdn.statically.io/gh/he79032-creator/dlssg_for_sm86/main/huayang-drive-time/index.html'             'https://cdn.jsdelivr.net/gh/he79032-creator/dlssg_for_sm86@main/huayang-drive-time/index.html'
+          do
+            echo "===== $url ====="
+            curl -L -A "$UA" -sS -o /tmp/body -D /tmp/headers "$url"
+            code=$(awk 'toupper($1) ~ /^HTTP\// {c=$2} END {print c}' /tmp/headers)
+            ctype=$(grep -i '^content-type:' /tmp/headers | tail -1 | tr -d '\r')
+            size=$(wc -c < /tmp/body)
+            title=$(grep -o '<title>[^<]*' /tmp/body | head -1 | sed 's/<title>//')
+            echo "status=$code"
+            echo "$ctype"
+            echo "bytes=$size"
+            echo "title=$title"
+          done
