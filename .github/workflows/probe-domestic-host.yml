@@ -1,0 +1,17 @@
+name: Probe Domestic HTML Host
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect SharingHTML upload flow
+        run: |
+          set -e
+          curl -L -sS 'https://sharinghtml.com/zh-CN/' -o /tmp/page
+          echo '--- forms ---'
+          grep -Eo '<form[^>]*>|action="[^"]+"|fetch\([^)]*|axios\.[a-z]+\([^)]*|/api/[A-Za-z0-9_/?=&.-]+' /tmp/page | head -200 || true
+          echo '--- scripts ---'
+          grep -Eo '<script[^>]+src="[^"]+"' /tmp/page | head -50 || true
