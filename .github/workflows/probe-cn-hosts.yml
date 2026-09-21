@@ -1,0 +1,49 @@
+name: Probe China Static Hosts
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - ".github/workflows/probe-cn-hosts.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect hosts
+        run: |
+          set -e
+          python3 - <<'PY'
+          import re, subprocess, urllib.parse
+          hosts=[
+            'https://app-73ubenfsp8n5.appmiaoda.com/',
+            'https://www.upma.cn/',
+            'https://home.imgbed.cn/html-hosting',
+            'https://www.dkfile.net/'
+          ]
+          for base in hosts:
+              print('\n===== HOST',base,'=====')
+              try:
+                  page=subprocess.check_output(['curl','-L','-sS',base],text=True,timeout=30)
+              except Exception as e:
+                  print('FETCH_FAIL',e); continue
+              scripts=re.findall(r'<script[^>]+src=["\']([^"\']+)["\']',page,re.I)
+              print('scripts',len(scripts))
+              blob=page
+              for src in scripts[:30]:
+                  url=urllib.parse.urljoin(base,src)
+                  try:
+                      blob+='\n'+subprocess.check_output(['curl','-L','-sS',url],text=True,timeout=20)
+                  except Exception:
+                      pass
+              eps=sorted(set(re.findall(r'https://[^"\'\s<>]+|/api/[A-Za-z0-9_/?=&.%:@-]+',blob)))
+              for e in eps:
+                  el=e.lower()
+                  if any(k in el for k in ('upload','publish','project','file','api')):
+                      print(e[:500])
+              for kw in ('upload','publish','FormData','apiKey','token','login'):
+                  m=re.search(kw,blob,re.I)
+                  if m:
+                      print('CTX',kw,blob[max(0,m.start()-160):m.start()+420].replace('\n',' ')[:800])
+          PY
