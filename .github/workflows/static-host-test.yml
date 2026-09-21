@@ -1,9 +1,5 @@
 name: Test Static Host Fallbacks
 on:
-  push:
-    branches: ["main"]
-    paths:
-      - ".github/workflows/static-host-test.yml"
   workflow_dispatch:
 permissions:
   contents: read
