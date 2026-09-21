@@ -1,5 +1,9 @@
 name: Probe Domestic HTML Host
 on:
+  push:
+    branches: ["main"]
+    paths:
+      - ".github/workflows/probe-domestic-host.yml"
   workflow_dispatch:
 permissions:
   contents: read
