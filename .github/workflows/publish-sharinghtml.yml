@@ -1,0 +1,30 @@
+name: Publish Huayang Calculator to SharingHTML
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - ".github/workflows/publish-sharinghtml.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Upload single-file H5
+        run: |
+          set -e
+          echo "Uploading..."
+          curl -sS -X POST 'https://api.sharinghtml.com/api/upload'             -F 'file=@huayang-drive-time/index.html;type=text/html'             -o /tmp/result.json
+          echo '--- response ---'
+          cat /tmp/result.json
+          echo
+          python3 - <<'PY'
+          import json
+          d=json.load(open('/tmp/result.json'))
+          print('PUBLIC_URL='+str(d.get('url')))
+          print('MANAGE_URL='+str(d.get('manageUrl')))
+          print('EXPIRE_AT='+str(d.get('expireAt')))
+          print('ID='+str(d.get('id')))
+          PY
