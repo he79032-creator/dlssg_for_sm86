@@ -4,6 +4,7 @@ on:
     branches: ["main"]
     paths:
       - ".github/workflows/publish-sharinghtml.yml"
+      - "huayang-drive-time/index.html"
   workflow_dispatch:
 permissions:
   contents: read
