@@ -35,12 +35,12 @@
 <section class="card"><h2 class="section-title">③ 你的学车时间线</h2><div id="timeline" class="timeline"></div></section>
 <section class="card"><h2 class="section-title">④ 规划说明</h2><div class="notice"><p>当前法规下，C1/C2 科目二在取得学习驾驶证明满10日后可预约；C2科目三满20日，C1科目三满30日。工具还叠加了你的练车频率、科一准备和预约等待，因此结果通常比“法规最早时间”更现实。</p><p>法规依据：公安部令第172号，自2025年1月1日起施行。<a class="legal-link" href="https://www.gov.cn/gongbao/2025/issue_11866/material/gwygb202505.pdf" target="_blank" rel="noopener">查看官方文件</a></p></div></section>
 </div>
-<div class="footer">成都市骅旸驾校 · 先算清时间，再安排学车</div>
+<div class="footer">成都市骅旸驾校 · 先算清时间，再安排学车<br><span id="sourceTag"></span></div>
 </div>
 <div id="toast" class="toast">已复制</div>
 <script>
 (function(){
-const $=id=>document.getElementById(id),DAY=86400000;
+const $=id=>document.getElementById(id),DAY=86400000; const params=new URLSearchParams(location.search); const source=params.get('source')||params.get('utm_source')||'direct';
 function pad(n){return String(n).padStart(2,'0')}
 function today(){const d=new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
 function parse(s){if(!s)return null;const a=s.split('-').map(Number);return new Date(Date.UTC(a[0],a[1]-1,a[2]))}
@@ -61,12 +61,12 @@ if(target){const d=diff(finish,target);if(d>=0){$('targetStatus').textContent='�
 const freq=per>=4?'高频练车':per>=2?'规律练车':'低频练车';$('salesExplain').textContent='按 '+type+'、每周 '+per+' 次练车和“'+paceName(pace)+'”节奏，建议按约 '+Math.ceil(total/7)+' 周规划。'+freq+'情况下，固定每周2—3个时间段通常更容易把周期控住。';
 const steps=[['开始准备',start,'确定车型、资料和学习节奏'],['科目一',k1,'完成理论准备与考试'],['科目二',k2,'约 '+s.k2+' 次训练；满足最低预约间隔后安排考试'],['科目三',k3,'约 '+s.k3+' 次道路训练；'+(type==='C2'?'最低预约间隔20日':'最低预约间隔30日')],['科目四 / 拿证',finish,'通过安全文明驾驶常识后进入领证环节']];
 $('timeline').innerHTML=steps.map((x,i)=>'<div class="step"><div class="dot">'+(i+1)+'</div><div><h3>'+x[0]+'</h3><div class="date">'+fmt(x[1])+'</div><p>'+x[2]+'</p></div></div>').join('');
-window.__last='【成都市骅旸驾校｜我的学车时间计划】\n车型：'+type+'\n开始：'+fmt(start)+'\n预计拿证：'+fmt(finish)+'\n预计周期：约'+total+'天（'+Math.ceil(total/7)+'周）\n练车频率：每周'+per+'次\n节奏：'+paceName(pace)+'\n\n结果为规划估算，实际以考试预约和个人学习情况为准。';
+window.__last='【成都市骅旸驾校｜我的学车时间计划】\n车型：'+type+'\n开始：'+fmt(start)+'\n预计拿证：'+fmt(finish)+'\n预计周期：约'+total+'天（'+Math.ceil(total/7)+'周）\n练车频率：每周'+per+'次\n节奏：'+paceName(pace)+'\n来源：'+source+'\n\n结果为规划估算，实际以考试预约和个人学习情况为准。';
 $('results').classList.add('show');setTimeout(()=>$('results').scrollIntoView({behavior:'smooth',block:'start'}),50)
 }
 function toast(s){$('toast').textContent=s;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),1400)}
 async function copy(){const t=window.__last||'';if(!t)return;try{await navigator.clipboard.writeText(t);toast('时间计划已复制')}catch(e){const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();toast('时间计划已复制')}}
-$('startDate').value=today();
+$('startDate').value=today(); if($('sourceTag')) $('sourceTag').textContent='来源标记：'+source;
 $('calcBtn').addEventListener('click',calc);$('copyBtn').addEventListener('click',copy);$('recalcBtn').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 $('license').addEventListener('change',()=>{const s=model($('license').value);$('sessionHint').textContent=$('license').value+' 默认按科二约'+s.k2+'次、科三约'+s.k3+'次训练做规划估算；这是咨询阶段的计划量，不是法定学时。'});
 })();
